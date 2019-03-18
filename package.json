@@ -1,0 +1,35 @@
+{
+  "name": "skyethedoge",
+  "version": "1.0.0",
+  "description": "A cute doggo for your Discord server!",
+  "main": "app.js",
+  "engines": {
+    "node": "10.14.1",
+    "npm": "6.4.1"
+  },
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "node-opus": "^0.3.1",
+    "random-puppy": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeljylam/Skye-the-Doge.git"
+  },
+  "keywords": [
+    "bot",
+    "discord"
+  ],
+  "author": "Michael Lam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaeljylam/Skye-the-Doge/issues"
+  },
+  "homepage": "https://github.com/michaeljylam/Skye-the-Doge#readme"
+}
