@@ -38,14 +38,6 @@ client.on("message", message => {
   }
 
   if (!message.content.startsWith(prefix) && !message.author.bot) {
-    if (message.author.id == 166316295766278145) { // Reacts to Jared's messages
-      message.react("💯")
-        .then(() => message.react("🔥"))
-        .then(() => message.react("👍"))
-        .then(() => message.react("👌"))
-        .then(() => message.react("💹"))
-        .catch(console.error);
-    }
 
     message.channel.fetchMessages({ limit: 3 }).then(messages => {
       let msgCount = 0, msgContent;

@@ -4,13 +4,14 @@ module.exports = {
   description: "Are we going to play fetch? :3",
   usage: '@user',
   execute(message) {
+    let muteRoleID = message.guild.roles.find(Role => Role.name.toLowerCase() === "busy").id;
     let user = message.member;
     if (message.mentions && message.mentions.members && message.mentions.members.size > 0)
       user = message.mentions.members.first();
 
     if (user.id != 519688128601260034) {
       message.channel.send("Woof! (YAY :) 🎉 🎉)");
-      user.addRole("540370007285170197")
+      user.addRole(muteRoleID)
         .then(message.channel.send("Woof! (YAY :) Let's play fetch!)"))
         .catch(console.error);
       message.channel.send("*(" + user + ", you can tell me to s!stopplayingwith you in #bot-commands, but do you really want to? :( )*");
