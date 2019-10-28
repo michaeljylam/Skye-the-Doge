@@ -9,17 +9,17 @@ module.exports = {
       user = message.mentions.members.first();
 
     try {
-      if (user.id == 267070467154771987) {
+      if (user.id === 267070467154771987) {
         message.channel.send("...");
         message.member.setNickname("BORK BORK (Hey :( )")
       } else {
-        if (userArgument[0] != user) {
+        if (userArgument[0] !== user) {
           var nickname = userArgument.join(' ');
         } else {
           var nickname = userArgument.splice(1).join(' ');
         }
 
-        if (nickname.length == 0) {
+        if (nickname.length === 0) {
           user.setNickname(nickname).then(message.channel.send("Woof woof! (OK, I removed " + user.user.username + "'s nickname!)"));
         } else if (nickname.length <= 32) {
           if (user.nickname != null) {

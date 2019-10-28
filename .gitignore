@@ -1,6 +1,4 @@
-# Dependencies
-node_modules/
-
-config.json
-
 .DS_Store
+.idea
+config.json
+node_modules/

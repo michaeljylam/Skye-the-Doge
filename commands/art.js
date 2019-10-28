@@ -3,7 +3,7 @@ module.exports = {
   aliases: ["artwork"],
   description: "Is this what you hoomans do instead of playing fetch?",
   execute(message) {
-      const i = Math.floor(Math.random() * (36 - 1)) + 1;
+      const i = Math.floor(Math.random() * (39 - 1)) + 1;
       const randomImage = "./commands/data/art/" + i + ".jpg";
 
       message.channel.startTyping();

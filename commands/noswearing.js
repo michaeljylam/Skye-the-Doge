@@ -10,7 +10,7 @@ module.exports = {
       message.channel.send("Skye doesn't want to hear foul language. :(")
     } else {
       swearingEnabled = true;
-      message.channel.send("Freedom of speech is what makes Canada a great place!")
+      message.channel.send("Skye go take a snooze...")
     }
     module.exports = swearingEnabled;
   },

@@ -10,9 +10,9 @@ module.exports = {
         user = message.mentions.members.first().nickname;
 
       // Replies differently when message mentions Gordia
-      if (message.mentions.members.first().id == 186602980563222528 && message.mentions.members.first().nickname.includes("/")) {
+      if (message.mentions.members.first().id === 186602980563222528 && message.mentions.members.first().nickname.includes("/")) {
         if (user.length < 32) {
-          if (user.length == 1) {
+          if (user.length === 1) {
             message.channel.send("Woof! (There's **1** slash in Gordia's nickname.)");
           } else if (user.length > 1 && user.length <= 31)
             message.channel.send("Woof woof! (There are **" + user.length + "** slashes in Gordia's nickname.)");
@@ -21,10 +21,10 @@ module.exports = {
           message.channel.send("Woof! (Are we embarrassing Gordia? If so, there's **32** slashes.)");
         }
       } else {
-        if (message.mentions.members.first().nickname == null) {
+        if (message.mentions.members.first().nickname === null) {
           message.channel.send("Woof! (There are **" + user.length + "** characters in that username.)");
         } else {
-          if (user.length == 1) {
+          if (user.length === 1) {
             message.channel.send("Woof woof! (There's **1** character in that nickname.)");
           } else {
             message.channel.send("Woof woof! (There's **" + user.length + "** characters in that nickname.)");

@@ -12,7 +12,7 @@ module.exports = {
       }
     }).catch(console.log);
 
-    if (message.guild.members.get("416808821281783818").nickname == "🎊 Happy Sea Toad 🎊" || happySet) {
+    if (message.guild.members.get("416808821281783818").nickname === "🎊 Happy Sea Toad 🎊" || happySet) {
       try {
         message.guild.members.get("326520499100319745").setNickname("Eaien the Happy Cuck");
         message.channel.send("Woof woof! (Don't attack the Cucoos in Zelda...)");

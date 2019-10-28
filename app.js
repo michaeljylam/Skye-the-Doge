@@ -51,26 +51,30 @@ client.on("message", message => {
           msgCount++;
         }
       }
-      if (msgContent == "f" && msgCount >= 3) {
+      if (msgContent === "f" && msgCount === 3) {
         message.channel.send("f");
-      } else if (msgContent == ":(" && msgCount >= 3) {
+        msgCount = 0;
+      } else if (msgContent === ":(" && msgCount === 3) {
         message.channel.send(":(");
+        msgCount = 0;
       }
     }).catch(console.log);
 
-    if (msg == "what" || msg == "what?" || msg == "wut") {
-      message.channel.fetchMessages({ limit: 2 }).then(messages => {
-        let arr = messages.array();
-        let userMsg = arr[1].content.replace(/\*/g, "").toUpperCase();
+    if (msg === "what" || msg === "what?" || msg === "wut") {
+      message.channel.fetchMessages({ limit: 1, before: message.id }).then(messages => {
+        let prevMsg = messages.array()[0];
+        let userMsg = prevMsg.content.replace(/\*/g, "").toUpperCase();
         // First statement ensures a file with no comments was sent
-        if (arr[1].content != "" && arr[1].member.user.id == message.author.id) {
+        if (prevMsg.content !== "" && prevMsg.member.user.id == message.author.id) {
           message.channel.send("***WOOF WOOF (YOU JUST SAID, " + userMsg + ")***");
-        } else if (arr[1].content != "" && arr[1].member.nickname != null) {
-          message.channel.send("***WOOF WOOF (" + arr[1].member.nickname.toUpperCase() + " SAID, " + userMsg + ")***");
-        } else if (arr[1].content != "" && arr[1].member.nickname == null) {
-          message.channel.send("***WOOF WOOF (" + arr[1].member.user.username.toUpperCase() + " SAID, " + userMsg + ")***");
+        } else if (prevMsg.content !== "" && prevMsg.member.nickname != null) {
+          message.channel.send("***WOOF WOOF (" + prevMsg.member.nickname.toUpperCase() + " SAID, " + userMsg + ")***");
+        } else if (prevMsg.content !== "" && prevMsg.member.nickname == null) {
+          message.channel.send("***WOOF WOOF (" + prevMsg.member.user.username.toUpperCase() + " SAID, " + userMsg + ")***");
         }
       }).catch(console.log);
+    } else if (msg === "k") {
+      message.delete();
     }
   } else if (message.author.bot) {
     return;

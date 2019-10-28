@@ -9,7 +9,7 @@ module.exports = {
     if (message.mentions && message.mentions.members && message.mentions.members.size > 0)
       user = message.mentions.members.first();
 
-    if (user.id != 519688128601260034) {
+    if (user.id !== 519688128601260034) {
       message.channel.send("Woof! (YAY :) 🎉 🎉)");
       user.addRole(muteRoleID)
         .then(message.channel.send("Woof! (YAY :) Let's play fetch!)"))
