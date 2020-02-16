@@ -12,9 +12,11 @@ const grammarCheck = [
   { grammarError: "i'd of", correction: "I'd have"},
   { grammarError: "we'd of", correction: "we'd have"},
   { grammarError: "that'd of", correction: "that'd have"},
+  { grammarError: "applyed", correction: "applied"},
   { grammarError: "color", correction: "colour"},
   { grammarError: "favorite", correction: "favourite"},
   { grammarError: "donut", correction: "doughnut"},
+  { grammarError: "flavor", correction: "flavour"},
   { grammarError: "will effect", correction: "will affect"}
  ];
 

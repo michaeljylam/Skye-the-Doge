@@ -25,7 +25,7 @@ client.on("message", message => {
   if (!swearingEnabled && !message.author.bot) {
     const swearWords = require('./commands/data/swearwords.js');
     const removeDupChar = s => s.split("").reduce((a, b) => (a[a.length - 1] != b) ? (a + b) : a, "");
-    const noSpCharMsg = msg.replace(/[*`_&\/\\#,+()~%.":?<>{}]/g, "").replace(/[$]/g, "s");
+    const noSpCharMsg = msg.replace(/[^A-Za-z0-9$]/g, "").replace(/[$]/g, "s");
     const noDupCharMsg = removeDupChar(noSpCharMsg);
     if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => noSpCharMsg.includes(substring))) {
       message.delete();
@@ -73,7 +73,10 @@ client.on("message", message => {
           message.channel.send("***WOOF WOOF (" + prevMsg.member.user.username.toUpperCase() + " SAID, " + userMsg + ")***");
         }
       }).catch(console.log);
-    } else if (msg === "k") {
+    }
+
+    const lettersOnlyMsg = msg.replace(/[^A-Za-z]/g, "")
+    if (lettersOnlyMsg === "k") {
       message.delete();
     }
   } else if (message.author.bot) {
@@ -105,7 +108,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
   if (!swearingEnabled) {
     const swearWords = require('./commands/data/swearwords.js');
     const removeDupChar = s => s.split("").reduce((a, b) => (a[a.length - 1] != b) ? (a + b) : a, "");
-    const noSpCharMsg = newMessage.content.toLowerCase().replace(/[*`_&\/\\#,+()~%.":?<>{}]/g, "").replace(/[$]/g, "s");
+    const noSpCharMsg = newMessage.content.toLowerCase().replace(/[^A-Za-z0-9$]/g, "").replace(/[$]/g, "s");
     const noDupCharMsg = removeDupChar(noSpCharMsg);
     if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => noSpCharMsg.includes(substring))) {
       newMessage.delete();
