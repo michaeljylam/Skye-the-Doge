@@ -13,11 +13,8 @@ module.exports = {
         message.channel.send("...");
         message.member.setNickname("BORK BORK (Hey :( )")
       } else {
-        if (userArgument[0] !== user) {
-          var nickname = userArgument.join(' ');
-        } else {
-          var nickname = userArgument.splice(1).join(' ');
-        }
+        userArgument.shift();
+        var nickname = userArgument.join(' ');
 
         if (nickname.length === 0) {
           user.setNickname(nickname).then(message.channel.send("Woof woof! (OK, I removed " + user.user.username + "'s nickname!)"));
@@ -27,6 +24,7 @@ module.exports = {
           } else {
             var oldNickname = user.user.username;
           }
+          console.log(nickname)
           user.setNickname(nickname).then(message.channel.send("Woof woof! (OK, I changed " + oldNickname + "'s nickname to " + user + "!)"));
         } else {
           message.channel.send("Bork bork! (Hey, that nickname is too long. :( You currently have " + nickname.length + " characters, and you can only have a maximum of 32. " + message.author + ")");

@@ -115,6 +115,13 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
       newMessage.channel.send("BORK BORK (Hey, no swearing :( " + newMessage.author + ")");
     }
   }
+
+  if (newMessage.author.id != 326520499100319745) {
+    const lettersOnlyMsg = newMessage.content.toLowerCase().replace(/[^A-Za-z]/g, "")
+    if (lettersOnlyMsg === "k") {
+      newMessage.delete();
+    }
+  }
 });
 
 client.login(token);
