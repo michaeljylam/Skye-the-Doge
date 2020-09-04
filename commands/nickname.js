@@ -17,7 +17,7 @@ module.exports = {
         var nickname = userArgument.join(' ');
 
         if (nickname.length === 0) {
-          user.setNickname(nickname).then(message.channel.send("Woof woof! (OK, I removed " + user.user.username + "'s nickname!)"));
+          user.setNickname(nickname).then(message.channel.send(`Woof woof! (OK, I removed ${user.user.username}'s nickname!)`));
         } else if (nickname.length <= 32) {
           if (user.nickname != null) {
             var oldNickname = user.nickname;
@@ -25,9 +25,9 @@ module.exports = {
             var oldNickname = user.user.username;
           }
           console.log(nickname)
-          user.setNickname(nickname).then(message.channel.send("Woof woof! (OK, I changed " + oldNickname + "'s nickname to " + user + "!)"));
+          user.setNickname(nickname).then(message.channel.send(`Woof woof! (OK, I changed ${oldNickname}'s nickname to ${user}!)`));
         } else {
-          message.channel.send("Bork bork! (Hey, that nickname is too long. :( You currently have " + nickname.length + " characters, and you can only have a maximum of 32. " + message.author + ")");
+          message.channel.send(`Bork bork! (Hey, that nickname is too long. :( You currently have ${nickname.length} characters, and you can only have a maximum of 32. ${message.author})`);
         }
       }
     } catch (error) {

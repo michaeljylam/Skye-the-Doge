@@ -10,6 +10,6 @@ module.exports = {
       const l5 = letters[Math.floor(Math.random() * letters.length)];
       const l6 = letters[Math.floor(Math.random() * letters.length)];
 
-      message.channel.send("g" + l2 + l3 + l4 + l5 + l6 + "g");
+      message.channel.send(`g${l2}${l3}${l4}${l5}${l6}g`);
   },
 };

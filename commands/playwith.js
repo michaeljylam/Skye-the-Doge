@@ -14,7 +14,7 @@ module.exports = {
       user.addRole(muteRoleID)
         .then(message.channel.send("Woof! (YAY :) Let's play fetch!)"))
         .catch(console.error);
-      message.channel.send("*(" + user + ", you can tell me to s!stopplayingwith you in #bot-commands, but do you really want to? :( )*");
+      message.channel.send(`*("${user}, you can tell me to s!stopplayingwith you in #bot-commands, but do you really want to? :( )*`);
     } else {
       message.channel.send("Woof! (Skye doesn't want to play alone :( Please mention someone I can play with!)");
     }

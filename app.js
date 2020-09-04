@@ -25,11 +25,11 @@ client.on("message", message => {
   if (!swearingEnabled && !message.author.bot) {
     const swearWords = require('./commands/data/swearwords.js');
     const removeDupChar = s => s.split("").reduce((a, b) => (a[a.length - 1] != b) ? (a + b) : a, "");
-    const noSpCharMsg = msg.replace(/[^A-Za-z0-9$]/g, "").replace(/[$]/g, "s");
-    const noDupCharMsg = removeDupChar(noSpCharMsg);
-    if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => noSpCharMsg.includes(substring))) {
+    const alphanumericOnlyMsg = msg.replace(/[^a-z0-9$]/g, "").replace(/[$]/g, "s");
+    const noDupCharMsg = removeDupChar(alphanumericOnlyMsg);
+    if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => alphanumericOnlyMsg.includes(substring))) {
       message.delete();
-      message.channel.send("BORK BORK (Hey, no swearing :( " + message.author + ")");
+      message.channel.send(`BORK BORK (Hey, no swearing :( ${message.author})`);
     }
     if (message.member.nickname != null && message.author.id != 267070467154771987
         && swearWords.some(substring => message.member.nickname.toLowerCase().includes(substring))) {
@@ -39,7 +39,7 @@ client.on("message", message => {
 
   if (!message.content.startsWith(prefix) && !message.author.bot) {
 
-    message.channel.fetchMessages({ limit: 3 }).then(messages => {
+    message.channel.messages.fetch({ limit: 3 }).then(messages => {
       let msgCount = 0, msgContent;
       let arr = messages.array();
       for (i = 0; i < 3; i++) {
@@ -61,22 +61,22 @@ client.on("message", message => {
     }).catch(console.log);
 
     if (msg === "what" || msg === "what?" || msg === "wut") {
-      message.channel.fetchMessages({ limit: 1, before: message.id }).then(messages => {
+      message.channel.messages.fetch({ limit: 1, before: message.id }).then(messages => {
         let prevMsg = messages.array()[0];
         let userMsg = prevMsg.content.replace(/\*/g, "").toUpperCase();
         // First statement ensures a file with no comments was sent
         if (prevMsg.content !== "" && prevMsg.member.user.id == message.author.id) {
-          message.channel.send("***WOOF WOOF (YOU JUST SAID, " + userMsg + ")***");
+          message.channel.send(`***WOOF WOOF (YOU JUST SAID, "${userMsg}")***`);
         } else if (prevMsg.content !== "" && prevMsg.member.nickname != null) {
-          message.channel.send("***WOOF WOOF (" + prevMsg.member.nickname.toUpperCase() + " SAID, " + userMsg + ")***");
+          message.channel.send(`***WOOF WOOF (${prevMsg.member.nickname.toUpperCase()} SAID, "${userMsg}")***`);
         } else if (prevMsg.content !== "" && prevMsg.member.nickname == null) {
-          message.channel.send("***WOOF WOOF (" + prevMsg.member.user.username.toUpperCase() + " SAID, " + userMsg + ")***");
+          message.channel.send(`***WOOF WOOF (${prevMsg.member.user.username.toUpperCase()} SAID, "${userMsg}")***`);
         }
       }).catch(console.log);
     }
 
-    const lettersOnlyMsg = msg.replace(/[^A-Za-z]/g, "")
-    if (lettersOnlyMsg === "k") {
+    const alphanumericOnlyMsg = msg.replace(/[^a-z0-9]/g, "")
+    if (alphanumericOnlyMsg === "k") {
       message.delete();
     }
   } else if (message.author.bot) {
@@ -92,13 +92,13 @@ client.on("message", message => {
       command.execute(message, userArgument);
     } catch (error) {
       console.error(error);
-      message.channel.send("BORK BORK (Sorry, " + message.author + ", but something went wrong.)");
+      message.channel.send(`BORK BORK (Sorry, ${message.author}, but something went wrong.)`);
     }
   }
 
   for (let i = 0; i < grammarCheck.length; i++) {
     if (msg.indexOf(grammarCheck[i].grammarError) !== -1) {
-      message.channel.send("Woof woof! (Hey, did you know that it's actually spelt *\"" + grammarCheck[i].correction + "\"*? Have a nice day!)");
+      message.channel.send(`Woof woof! (Hey, did you know that it's actually spelt *"${grammarCheck[i].correction}"*? Have a nice day!)`);
     }
   }
 });
@@ -108,20 +108,35 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
   if (!swearingEnabled) {
     const swearWords = require('./commands/data/swearwords.js');
     const removeDupChar = s => s.split("").reduce((a, b) => (a[a.length - 1] != b) ? (a + b) : a, "");
-    const noSpCharMsg = newMessage.content.toLowerCase().replace(/[^A-Za-z0-9$]/g, "").replace(/[$]/g, "s");
-    const noDupCharMsg = removeDupChar(noSpCharMsg);
-    if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => noSpCharMsg.includes(substring))) {
+    const alphanumericOnlyMsg = newMessage.content.toLowerCase().replace(/[^a-z0-9$]/g, "").replace(/[$]/g, "s");
+    const noDupCharMsg = removeDupChar(alphanumericOnlyMsg);
+    if (swearWords.some(substring => noDupCharMsg.includes(substring)) || swearWords.some(substring => alphanumericOnlyMsg.includes(substring))) {
       newMessage.delete();
-      newMessage.channel.send("BORK BORK (Hey, no swearing :( " + newMessage.author + ")");
+      newMessage.channel.send(`BORK BORK (Hey, no swearing :( ${newMessage.author})`);
     }
   }
+});
 
-  if (newMessage.author.id != 326520499100319745) {
-    const lettersOnlyMsg = newMessage.content.toLowerCase().replace(/[^A-Za-z]/g, "")
-    if (lettersOnlyMsg === "k") {
-      newMessage.delete();
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'server-logs');
+  channel.send(`${new Date().toLocaleString('en-US')}: ${member} has joined the server.`);
+  if (member.id !== 186602980563222528) { // If new member is not Gordia
+    member.roles.set(['559938493518970902']).catch(console.error)
+    if (member.id == 326520499100319745) { // Ian
+      member.roles.set(['562002042512474132', '559933178152747049', '689084435785711666']).catch(console.error)
     }
   }
+});
+
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  if (oldMember.id == 326520499100319745 && oldMember.roles.cache.size > newMember.roles.cache.size) { // Ian
+    newMember.roles.set(['562002042512474132', '559938493518970902', '559933178152747049', '689084435785711666']).catch(console.error)
+  }
+});
+
+client.on('guildMemberRemove', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'server-logs');
+  channel.send(`${new Date().toLocaleString('en-US')}: ${member} has left the server.`);
 });
 
 client.login(token);

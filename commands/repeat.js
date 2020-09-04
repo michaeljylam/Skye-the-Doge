@@ -11,7 +11,7 @@ module.exports = {
       message.channel.send("Bork bork! (Skye can't repeat that 0 times :( )");
     } else if (number % 1 === 0 && msg.length > 1) {
       for (i = 0; i < number; i++) {
-        repeatedMsg += " " + msg;
+        repeatedMsg += ` ${msg}`;
       }
       for (i = 0; i < repeatedMsg.length; i += 2000) {
         const msgToSend = repeatedMsg.substring(i, Math.min(repeatedMsg.length, i + 2000))

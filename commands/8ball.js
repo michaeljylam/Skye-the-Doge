@@ -38,9 +38,9 @@ module.exports = {
 
     if (userArgument.length > 0) {
       const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      message.channel.send("Woof woof! (" + message.author + ", " + randomResponse + ")");
+      message.channel.send(`Woof woof! (${message.author}, ${randomResponse})`);
     } else {
-      message.channel.send("Woof! (Please ask a question " + message.author + "!)");
+      message.channel.send(`Woof! (Please ask a question ${message.author}!)`);
     }
   },
 };

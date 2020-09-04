@@ -8,8 +8,9 @@
     "npm": "6.4.1"
   },
   "dependencies": {
-    "discord.js": "^11.6.4",
+    "discord.js": "^12.3.1",
     "ffmpeg-binaries": "^4.0.0",
+    "ffmpeg-static": "^4.2.7",
     "node-opus": "^0.3.3",
     "random-puppy": "^1.1.0"
   },
