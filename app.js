@@ -38,7 +38,6 @@ client.on("message", message => {
   }
 
   if (!message.content.startsWith(prefix) && !message.author.bot) {
-
     message.channel.messages.fetch({ limit: 3 }).then(messages => {
       let msgCount = 0, msgContent;
       let arr = messages.array();

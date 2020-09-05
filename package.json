@@ -4,8 +4,8 @@
   "description": "A cute doggo for your Discord server!",
   "main": "app.js",
   "engines": {
-    "node": "10.14.1",
-    "npm": "6.4.1"
+    "node": "13.x",
+    "npm": "6.14.8"
   },
   "dependencies": {
     "discord.js": "^12.3.1",
@@ -32,5 +32,5 @@
   "bugs": {
     "url": "https://github.com/michaeljylam/Skye-the-Doge/issues"
   },
-  "homepage": "https://github.com/michaeljylam/Skye-the-Doge#readme"
+  "homepage": "https://github.com/michaeljylam/Skye-the-Doge"
 }
