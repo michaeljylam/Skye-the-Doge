@@ -59,7 +59,7 @@ client.on("message", message => {
       }
     }).catch(console.log);
 
-    if (msg === "what" || msg === "what?" || msg === "wut") {
+    if (Math.random() <= 0.3 && (msg === "what" || msg === "what?" || msg === "wut")) {
       message.channel.messages.fetch({ limit: 1, before: message.id }).then(messages => {
         let prevMsg = messages.array()[0];
         let userMsg = prevMsg.content.replace(/\*/g, "").toUpperCase();
@@ -97,6 +97,12 @@ client.on("message", message => {
 
   for (let i = 0; i < grammarCheck.length; i++) {
     if (msg.indexOf(grammarCheck[i].grammarError) !== -1) {
+      try {
+        message.react("🐶")
+        message.reactions.removeAll()
+      } catch(error) {
+        message.member.setNickname(`Woof woof! (It's ${grammarCheck[i].correction}!)`).catch(console.error);
+      }
       message.channel.send(`Woof woof! (Hey, did you know that it's actually spelt *"${grammarCheck[i].correction}"*? Have a nice day!)`);
     }
   }

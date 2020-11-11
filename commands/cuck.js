@@ -3,7 +3,9 @@ module.exports = {
   description: "Please save your game before you repeat my mistake...",
   async execute(message) {
     try {
-      message.guild.members.get("326520499100319745").setNickname("Eaien the Happy Cuck");
+      message.guild.members.fetch("326520499100319745").then(member => {
+        member.setNickname("Eaien the Happy Cuck");
+      });
       message.channel.send("Woof woof! (Don't attack the Cucoos...)");
     } catch (error) {
       console.error(error);
