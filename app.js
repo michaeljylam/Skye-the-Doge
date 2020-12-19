@@ -133,17 +133,21 @@ client.on('messageDelete', async message => {
 
 	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
 
-	const { executor } = deletionLog;
+	const { executor, target } = deletionLog;
   const channel = message.guild.channels.cache.find(ch => ch.name === 'server-logs');
 
   if (message.content === '') {
-    message.content = "Message only contained the below attachment.";
+    if (message.attachments.size > 0) {
+      message.content = "Message only contained the below attachment.";
+    } else {
+      return;
+    }
   }
 
-  if (executor.id === message.author.id) {
-    channel.send(`**${new Date().toLocaleString('en-US')}**: A message from ${message.author.username} was deleted either by themselves or by a bot:\n> ${message}`);
-  } else {
+  if (target.id === message.author.id) {
     channel.send(`**${new Date().toLocaleString('en-US')}**: A message from ${message.author.username} was deleted by ${executor.username}:\n> ${message}`);
+  } else {
+    channel.send(`**${new Date().toLocaleString('en-US')}**: A message from ${message.author.username} was deleted either by themselves or by a bot:\n> ${message}`);
   }
 
   if (message.attachments.size > 0) {
